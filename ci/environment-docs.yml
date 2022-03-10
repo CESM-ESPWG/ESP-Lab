@@ -1,0 +1,16 @@
+name: xdev-project-dev
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - furo
+  - jupyterlab
+  - myst-nb
+  - pip
+  - python=3.10
+  - sphinx-autobuild
+  - sphinx-copybutton
+  - sphinx-inline-tabs
+  - pip:
+      - sphinxext-opengraph
+      - -e ..

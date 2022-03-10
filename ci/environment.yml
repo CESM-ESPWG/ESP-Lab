@@ -1,0 +1,7 @@
+name: xdev-project-dev
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - pytest-cov
+  - pre-commit
