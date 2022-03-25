@@ -1,6 +1,6 @@
-# Install xdev-project
+# Install esp-lab
 
-xdev-project can be installed in three ways:
+esp-lab can be installed in three ways:
 
 ```{eval-rst}
 .. tab:: pip
@@ -9,7 +9,7 @@ xdev-project can be installed in three ways:
 
     .. code:: bash
 
-        $ python -m pip install xdev-project
+        $ python -m pip install esp-lab
 
 .. tab:: conda
 
@@ -18,7 +18,7 @@ xdev-project can be installed in three ways:
 
     .. code:: bash
 
-        $ conda install xdev-project --channel conda-forge
+        $ conda install esp-lab --channel conda-forge
 
 .. tab:: Development version
 
@@ -26,8 +26,8 @@ xdev-project can be installed in three ways:
 
     .. code:: bash
 
-        $ git clone https://github.com/ncar-xdev/xdev-project
-        $ cd xdev-project
+        $ git clone https://github.com/CESM-ESPWG/ESP-Lab
+        $ cd esp-lab
         $ python -m pip install -e .
 
 ```
