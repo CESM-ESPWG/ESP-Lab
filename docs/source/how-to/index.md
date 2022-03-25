@@ -6,6 +6,6 @@ How to:
 ---
 maxdepth: 1
 ---
-install-xdev-project.md
+install-esp-lab.md
 
 ```
