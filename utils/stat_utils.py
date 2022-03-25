@@ -1,3 +1,20 @@
+"""
+Authors
+-------
+    - Steve Yeager
+    - E. Maroon
+    - Teagan King
+Use
+---
+    Users wishing to utilize these tools may do so by importing various functions, for example:
+    ::
+        from esp-tools.utils.stat_utils import cor_ci_bootyears
+
+Dependencies
+------------
+    The user must have an activated conda environment which includes xarray, numpy, sys, cftime, and xskillscore.
+"""
+
 import xarray as xr
 import numpy as np
 import sys
@@ -5,7 +22,12 @@ import cftime
 import xskillscore as xs
 
 def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
-    """ """
+    """
+    parameters
+    ----------
+    returns
+    -------
+    """
     ptilemin = (100.-conf)/2.
     ptilemax = conf + (100-conf)/2.
 
@@ -33,7 +55,13 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     return minci, maxci
 
 def detrend_linear(dat, dim):
-    """ linear detrend dat along the axis dim """
+    """
+    linear detrend dat along the axis dim
+    parameters
+    ----------
+    returns
+    -------
+    """
     params = dat.polyfit(dim=dim, deg=1)
     fit = xr.polyval(dat[dim], params.polyfit_coefficients)
     dat = dat-fit
@@ -42,18 +70,27 @@ def detrend_linear(dat, dim):
 def remove_drift(da, da_time, y1, y2):
     """
     Function to convert raw DP DataArray into anomaly DP DataArray with leadtime-dependent climatology removed.
-    --Inputs--
-        da:  Raw DP DataArray with dimensions (Y,L,M,...)
-        da_time:  Verification time of DP DataArray (Y,L)
-        y1:  Start year of climatology
-        y2:  End year of climatology
-        
-    --Outputs--
-        da_anom:  De-drifted DP DataArray
-        da_climo:  Leadtime-dependent climatology
+    parameters
+    ----------
+    da : DP DataArray
+        Raw DP DataArray with dimensions (Y,L,M,...)
+    da_time : DP DataArray
+        Verification time of DP DataArray (Y,L)
+    y1 : int
+        Start year of climatology
+    y2 : int
+        End year of climatology
+    
+    returns
+    -------    
+    da_anom : DP DataArray
+        De-drifted DP DataArray
+    da_climo : DP DataArray
+        Leadtime-dependent climatology
     
     Author: E. Maroon (modified by S. Yeager)
     """
+
     d1 = cftime.DatetimeNoLeap(y1,1,1,0,0,0)
     d2 = cftime.DatetimeNoLeap(y2,12,31,23,59,59)
     masked_period = da.where((da_time>d1) & (da_time<d2))
@@ -67,11 +104,18 @@ def leadtime_skill_seas(mod_da,mod_time,obs_da,detrend=False):
     must share the same lat/lon coordinates (if any). Assumes time coordinates are compatible
     (can be aligned). Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
     
-        Inputs
-        mod_da: a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
-        mod_time: a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
-            returns the mid-month of a 3-month seasonal average (e.g., mon=1 ==> "DJF").
-        obs_da: an OBS DataArray dimensioned (season,year,...)
+    parameters
+    ----------
+    mod_da: DataArray
+        a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
+    returns
+    -------
+    xr_dataset : DataArray
+        the mid-month of a 3-month seasonal average (e.g., mon=1 ==> "DJF").
+    obs_da: DataArray (not returned?)
+        an OBS DataArray dimensioned (season,year,...)
     """
     seasons = {1:'DJF',4:'MAM',7:'JJA',10:'SON'}
     corr_list = []; pval_list = []; rmse_list = []; msss_list = []; rpc_list = []; pers_list = []
@@ -103,13 +147,34 @@ def leadtime_skill_seas(mod_da,mod_time,obs_da,detrend=False):
     rmse = xr.concat(rmse_list,leadtime)
     msss = xr.concat(msss_list,leadtime)
     rpc = xr.concat(rpc_list,leadtime)
-    return xr.Dataset({'corr':corr,'pval':pval,'nrmse':rmse,'msss':msss,'rpc':rpc})
+    xr_dataset = xr.Dataset({'corr':corr,'pval':pval,'nrmse':rmse,'msss':msss,'rpc':rpc})
+    return xr_dataset
 
 def leadtime_skill_seas_resamp(mod_da,mod_time,obs_da,sampsize,N,detrend=False):
     """ 
     Same as leadtime_skill_seas(), but this version resamples the mod_da member dimension (M) to generate
     a distribution of skill scores using a smaller ensemble size (N, where N<M). Returns the 
     mean of the resampled skill score distribution.
+    
+    parameters
+    ----------
+    mod_da: DataArray
+        a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
+    obs_da: DataArray
+        an OBS DataArray dimensioned (season,year,...)
+    sampsize : int (?)
+        sample size
+    N : int (?)
+        maximum dimension (?)
+    detrend : bool
+        (?)
+
+    returns
+    -------
+    dsout : int (?)
+        mean of resampled skill score distribution
     """
     dslist = []
     seasons = {1:'DJF',4:'MAM',7:'JJA',10:'SON'}
