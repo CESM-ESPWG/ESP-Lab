@@ -32,10 +32,11 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     ts1 : array
     ts2 : array
     seed : int (optional)
-        seed for random number generation
-    nboots : number boots (optional)
-    conf : float
-        (?)
+        seed for random number generation, default None
+    nboots : int
+        number boots (optional, default 1000)
+    conf : float (optional)
+        (?) Defaults to 95
 
     Returns
     -------
@@ -140,6 +141,10 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
         a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
     mod_time: DataArray
         a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
+    obs_da: DataArray
+        an OBS DataArray dimensioned (season,year,...)
+    detrend (optional): bool
+        (?) Defaults to False.
     Returns
     -------
     xr_dataset : DataArray
@@ -187,7 +192,12 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
 
 def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=False):
     """
-    Same as leadtime_skill_seas(), but this version resamples the
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same lat/lon
+    coordinates (if any). Assumes time coordinates are compatible (can be aligned).
+    Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
+
+    Unlike leadtime_skill_seas(), this version resamples the
     mod_da member dimension (M) to generate a distribution of skill scores
     using a smaller ensemble size (N, where N<M). Returns the mean of the
     resampled skill score distribution.
@@ -204,8 +214,8 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         sample size
     N : int (?)
         maximum dimension (?)
-    detrend : bool
-        (?)
+    detrend : bool (optional)
+        (?) defaults to False
 
     Returns
     -------

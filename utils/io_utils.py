@@ -22,7 +22,8 @@ from functools import partial
 
 
 def file_dict(filetempl, filetype, mem, stmon):
-    """ Returns a dictionary of filepaths keyed by initialization year, 
+    """
+    Returns a dictionary of filepaths keyed by initialization year, 
     for a given experiment, field, ensemble member, and initialization month
 
     Parameters
@@ -61,7 +62,8 @@ def file_dict(filetempl, filetype, mem, stmon):
 
 
 def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon):
-    """ retrieves a nested list of files for these start years and ensemble members
+    """
+    Retrieves a nested list of files for these start years and ensemble members
 
     Parameters
     ----------
@@ -135,7 +137,7 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     preproc : bool (?)
         (?)
     chunks : (array ?)
-        chunks for dask array
+        chunks for dask array, defaults to {}
 
     Returns
     -------
