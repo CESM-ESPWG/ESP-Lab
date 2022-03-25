@@ -10,7 +10,7 @@ jobs:
   skip-duplicate-jobs:
     runs-on: ubuntu-latest
     if: |
-      github.repository == 'ncar-xdev/python-project-template'
+      github.repository == 'CESM-ESPWG/ESP-Lab'
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
@@ -40,7 +40,7 @@ jobs:
         with:
           channels: conda-forge,nodefaults
           channel-priority: strict
-          activate-environment: xdev-project-dev
+          activate-environment: esp-lab-dev
           auto-update-conda: false
           python-version: ${{ matrix.python-version }}
           environment-file: ci/environment.yml
@@ -48,7 +48,7 @@ jobs:
           use-mamba: true
           miniforge-variant: Mambaforge
 
-      - name: Install xdev-project
+      - name: Install esp-lab
         run: |
           python -m pip install -e . --no-deps --force-reinstall
           conda list
