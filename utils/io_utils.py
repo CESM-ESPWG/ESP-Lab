@@ -8,7 +8,7 @@ Use
 ---
     Users wishing to utilize these tools may do so by importing various functions, for example:
     ::
-        from esp-tools.utils import file_dict
+        from esp-tools.utils.io_utils import file_dict
 
 Dependencies
 ------------
