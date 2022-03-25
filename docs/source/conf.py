@@ -1,6 +1,6 @@
 import datetime
 
-import xdev_project
+import esp-lab
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -53,15 +53,15 @@ master_doc = 'index'
 
 # General information about the project.
 current_year = datetime.datetime.now().year
-project = 'xdev-project'
-copyright = f'{current_year}, xdev-project developers'
-author = 'xdev-project developers'
+project = 'esp-lab'
+copyright = f'{current_year}, esp-lab developers'
+author = 'esp-lab developers'
 
 
 # The short X.Y version.
-version = xdev_project.__version__.split('+')[0]
+version = esp_lab.__version__.split('+')[0]
 # The full version, including alpha/beta/rc tags.
-release = xdev_project.__version__
+release = esp_lab.__version__
 
 
 # List of patterns, relative to source directory, that match files and
@@ -79,8 +79,8 @@ html_theme = 'furo'
 html_title = ''
 
 html_context = {
-    'github_user': 'ncar-xdev',
-    'github_repo': 'xdev-project',
+    'github_user': 'TeaganKing',
+    'github_repo': 'esp-lab',
     'github_version': 'main',
     'doc_path': 'docs',
 }
@@ -101,7 +101,7 @@ html_last_updated_fmt = '%b %d, %Y'
 
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'xdev-projectdoc'
+htmlhelp_basename = 'esp-labdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -116,22 +116,21 @@ latex_elements = {
 }
 
 
-latex_documents = [('index', 'xdev-project.tex', 'xdev-project Documentation', author, 'manual')]
+latex_documents = [('index', 'esp-lab.tex', 'esp-lab Documentation', author, 'manual')]
 
-man_pages = [('index', 'xdev-project', 'xdev-project Documentation', [author], 1)]
+man_pages = [('index', 'esp-lab', 'esp-lab Documentation', [author], 1)]
 
 texinfo_documents = [
     (
         'index',
-        'xdev-project',
-        'xdev-project Documentation',
+        'esp-lab',
+        'esp-lab Documentation',
         author,
-        'xdev-project',
+        'esp-lab',
         'One line description of project.',
         'Miscellaneous',
     )
 ]
-
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
