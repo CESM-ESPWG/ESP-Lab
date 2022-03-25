@@ -1,4 +1,4 @@
-name: xdev-project-dev
+name: esp-lab-dev
 channels:
   - conda-forge
   - nodefaults
