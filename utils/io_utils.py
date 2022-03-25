@@ -11,7 +11,8 @@ Use
 
 Dependencies
 ------------
-    The user must have an activated conda environment which includes xarray, numpy, glob, and functools.
+    The user must have an activated conda environment which includes
+    xarray, numpy, glob, and functools.
 """
 
 import xarray as xr
@@ -108,7 +109,8 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
     return files, yrs[ix == 1]
 
 
-def get_monthly_data(filetemplate, filetype, ens, nlead, field, firstyear, lastyear, stmon, preproc, chunks={}):
+def get_monthly_data(filetemplate, filetype, ens, nlead, field,
+                     firstyear, lastyear, stmon, preproc, chunks={}):
     """
     Returns a dask array containing the requested hindcast ensemble
 
@@ -141,7 +143,8 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field, firstyear, lasty
         dask array containing requested hindcast ensemble
     """
 
-    file_list, yrs = nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon)
+    file_list, yrs = nested_file_list_by_year(filetemplate, filetype, ens,
+                                              firstyear, lastyear, stmon)
 
     ds0 = xr.open_mfdataset(file_list,
                             combine="nested",

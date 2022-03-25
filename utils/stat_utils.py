@@ -12,7 +12,8 @@ Use
 
 Dependencies
 ------------
-    The user must have an activated conda environment which includes xarray, numpy, sys, cftime, and xskillscore.
+    The user must have an activated conda environment which includes
+    xarray, numpy, sys, cftime, and xskillscore.
 """
 
 import xarray as xr
@@ -72,7 +73,9 @@ def detrend_linear(dat, dim):
 
 def remove_drift(da, da_time, y1, y2):
     """
-    Function to convert raw DP DataArray into anomaly DP DataArray with leadtime-dependent climatology removed.
+    Function to convert raw DP DataArray into anomaly DP DataArray
+    with leadtime-dependent climatology removed.
+
     Parameters
     ----------
     da : DP DataArray
@@ -104,9 +107,10 @@ def remove_drift(da, da_time, y1, y2):
 
 def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     """
-    Computes a suite of deterministic skill metrics given two DataArrays corresponding to model and observations, which
-    must share the same lat/lon coordinates (if any). Assumes time coordinates are compatible
-    (can be aligned). Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same lat/lon
+    coordinates (if any). Assumes time coordinates are compatible (can be aligned).
+    Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
 
     Parameters
     ----------
@@ -162,9 +166,10 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
 
 def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=False):
     """
-    Same as leadtime_skill_seas(), but this version resamples the mod_da member dimension (M) to generate
-    a distribution of skill scores using a smaller ensemble size (N, where N<M). Returns the
-    mean of the resampled skill score distribution.
+    Same as leadtime_skill_seas(), but this version resamples the
+    mod_da member dimension (M) to generate a distribution of skill scores
+    using a smaller ensemble size (N, where N<M). Returns the mean of the
+    resampled skill score distribution.
 
     Parameters
     ----------
