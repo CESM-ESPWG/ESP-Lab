@@ -1,4 +1,10 @@
 """
+This module provides utilities which support input/output processes.
+Functions in this module can provide methods to return dictionaries
+of filepaths keyed by initialization year, nested lists of files
+for particular start years and ensemble members, and dask arrays
+containing particular hindcast ensembles.
+
 Authors
 -------
     - Steve Yeager
@@ -23,7 +29,7 @@ from functools import partial
 
 def file_dict(filetempl, filetype, mem, stmon):
     """
-    Returns a dictionary of filepaths keyed by initialization year, 
+    Returns a dictionary of filepaths keyed by initialization year,
     for a given experiment, field, ensemble member, and initialization month
 
     Parameters
@@ -114,7 +120,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
 def get_monthly_data(filetemplate, filetype, ens, nlead, field,
                      firstyear, lastyear, stmon, preproc, chunks={}):
     """
-    Returns a dask array containing the requested hindcast ensemble
+    Returns a dask array containing the requested hindcast ensemble.
 
     Parameters
     ----------

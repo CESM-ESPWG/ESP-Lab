@@ -1,4 +1,10 @@
 """
+This module provides utilities to assist in statistics calculations related
+to SMYLE analysis. Functions provide tools to perform linear detrending along
+a particular axis, determine skill metrics based on model and observation
+DataArrays, and generate a distribution of skill scores using a smaller ensemble
+member size.
+
 Authors
 -------
     - Steve Yeager
@@ -6,7 +12,8 @@ Authors
     - Teagan King
 Use
 ---
-    Users wishing to utilize these tools may do so by importing various functions, for example:
+    Users wishing to utilize these tools may do so by importing
+    various functions, for example:
     ::
         from esp-tools.utils.stat_utils import cor_ci_bootyears
 
@@ -46,8 +53,8 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
         maximum percentile (?)
     """
 
-    ptilemin = (100. - conf) / 2.  # hardcoded
-    ptilemax = conf + (100 - conf) / 2.  # hardcoded
+    ptilemin = (100. - conf) / 2.
+    ptilemax = conf + (100 - conf) / 2.
 
     if (ts1.size != ts2.size):
         print("The two arrays must have the same size")
@@ -131,9 +138,10 @@ def remove_drift(da, da_time, y1, y2):
 def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     """
     Computes a suite of deterministic skill metrics given two DataArrays
-    corresponding to model and observations, which must share the same lat/lon
-    coordinates (if any). Assumes time coordinates are compatible (can be aligned).
-    Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should represent 3-month seasonal
+    averages (DJF, MAM, JJA, SON).
 
     Parameters
     ----------
@@ -186,16 +194,18 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     rmse = xr.concat(rmse_list, leadtime)
     msss = xr.concat(msss_list, leadtime)
     rpc = xr.concat(rpc_list, leadtime)
-    xr_dataset = xr.Dataset({'corr': corr, 'pval': pval, 'nrmse': rmse, 'msss': msss, 'rpc': rpc})
+    xr_dataset = xr.Dataset({'corr': corr, 'pval': pval, 'nrmse': rmse,
+                             'msss': msss, 'rpc': rpc})
     return xr_dataset
 
 
 def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=False):
     """
     Computes a suite of deterministic skill metrics given two DataArrays
-    corresponding to model and observations, which must share the same lat/lon
-    coordinates (if any). Assumes time coordinates are compatible (can be aligned).
-    Both DataArrays should represent 3-month seasonal averages (DJF, MAM, JJA, SON).
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should represent 3-month seasonal
+    averages (DJF, MAM, JJA, SON).
 
     Unlike leadtime_skill_seas(), this version resamples the
     mod_da member dimension (M) to generate a distribution of skill scores
@@ -207,7 +217,7 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
     mod_da: DataArray
         a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
     mod_time: DataArray
-        a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
+        a hindcast time DataArray dimensioned (Y,L). Assumes mod_time.dt.month
     obs_da: DataArray
         an OBS DataArray dimensioned (season,year,...)
     sampsize : int (?)
@@ -262,6 +272,7 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         rmse = xr.concat(rmse_list, leadtime)
         msss = xr.concat(msss_list, leadtime)
         rpc = xr.concat(rpc_list, leadtime)
-        dslist.append(xr.Dataset({'corr': corr, 'pval': pval, 'rmse': rmse, 'msss': msss, 'rpc': rpc}))
+        dslist.append(xr.Dataset({'corr': corr, 'pval': pval, 'rmse': rmse,
+                                  'msss': msss, 'rpc': rpc}))
     dsout = xr.concat(dslist, dim='iteration').mean('iteration').compute()
     return dsout
