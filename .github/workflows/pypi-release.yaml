@@ -8,7 +8,7 @@ on:
 jobs:
   build-artifacts:
     runs-on: ubuntu-latest
-    if: github.repository == 'ncar-xdev/python-project-template'
+    if: github.repository == 'CESM-ESPWG/ESP-Lab'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,7 +33,7 @@ jobs:
         run: |
           python -m twine check dist/*
           pwd
-          if [ -f dist/xdev-project-0.0.0.tar.gz ]; then
+          if [ -f dist/esp-lab-0.0.0.tar.gz ]; then
             echo "❌ INVALID VERSION NUMBER"
             exit 1
           else
