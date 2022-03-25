@@ -25,14 +25,28 @@ import xskillscore as xs
 
 def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     """
+    INCLUDE DESCRIPTION HERE!
+
     Parameters
     ----------
+    ts1 : array
+    ts2 : array
+    seed : int (optional)
+        seed for random number generation
+    nboots : number boots (optional)
+    conf : float
+        (?)
+
     Returns
     -------
+    minci : float
+        minimum percentile (?)
+    maxci : float
+        maximum percentile (?)
     """
 
-    ptilemin = (100. - conf) / 2.
-    ptilemax = conf + (100 - conf) / 2.
+    ptilemin = (100. - conf) / 2.  # hardcoded
+    ptilemax = conf + (100 - conf) / 2.  # hardcoded
 
     if (ts1.size != ts2.size):
         print("The two arrays must have the same size")
@@ -50,7 +64,7 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     bootdat1 = bootdat1.reshape([samplesize, nboots])
     bootdat2 = bootdat2.reshape([samplesize, nboots])
 
-    bootcor = xr.corr(xr.DataArray(bootdat1), xr.DataArray(bootdat2), dim='dim_0')
+    bootcor = xr.corr(xr.DataArray(bootdat1), xr.DataArray(bootdat2), dim='dim_0')  # hardcoded
     minci = np.percentile(bootcor, ptilemin)
     maxci = np.percentile(bootcor, ptilemax)
 
@@ -59,16 +73,24 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
 
 def detrend_linear(dat, dim):
     """
-    linear detrend dat along the axis dim
+    Linear detrend dat along the axis dim.
+
     Parameters
     ----------
+    dat : array
+        data which is to be detrended
+    dim : (?)
+        dimension along which linear detrending is performed
+
     Returns
     -------
+    dat : array
+        detrended array
     """
     params = dat.polyfit(dim=dim, deg=1)
     fit = xr.polyval(dat[dim], params.polyfit_coefficients)
     dat = dat - fit
-    return dat
+    return dat  # ToDo: make new name? or leave as is for space efficiency?
 
 
 def remove_drift(da, da_time, y1, y2):
@@ -97,8 +119,8 @@ def remove_drift(da, da_time, y1, y2):
     Author: E. Maroon (modified by S. Yeager)
     """
 
-    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)
-    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)
+    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)  # hardcoded
+    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)  # hardcoded
     masked_period = da.where((da_time > d1) & (da_time < d2))
     da_climo = masked_period.mean('M').mean('Y')
     da_anom = da - da_climo
@@ -125,13 +147,12 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     obs_da: DataArray (not returned?)
         an OBS DataArray dimensioned (season,year,...)
     """
-    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}
+    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}  # hardcoded
     corr_list = []
     pval_list = []
     rmse_list = []
     msss_list = []
     rpc_list = []
-    pers_list = []
     # convert L to leadtime values:
     leadtime = mod_da.L - 2
     for i in mod_da.L.values:
@@ -192,7 +213,7 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         mean of resampled skill score distribution
     """
     dslist = []
-    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}
+    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}  # hardcoded
     # convert L to leadtime values:
     leadtime = mod_da.L - 2
     # Perform resampling
@@ -205,7 +226,6 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         rmse_list = []
         msss_list = []
         rpc_list = []
-        pers_list = []
         for i in mod_da.L.values:
             ens_ts = mod_da_r.sel(iteration=l).sel(L=i).rename({'Y': 'time'})
             ens_time_year = mod_time.sel(L=i).dt.year.data

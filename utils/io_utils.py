@@ -54,7 +54,7 @@ def file_dict(filetempl, filetype, mem, stmon):
     for file in files:
         # isolate initialization year from the file name
         ystr = file.split(filetype)[0]
-        y0 = int(ystr[-11:-7])
+        y0 = int(ystr[-11:-7])  # hardcoded
         filepaths[y0] = file
 
     return filepaths
