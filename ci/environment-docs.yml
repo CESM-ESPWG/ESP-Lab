@@ -3,14 +3,17 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
+  - cftime
   - furo
   - jupyterlab
   - myst-nb
+  - numpy
   - pip
   - python=3.10
   - sphinx-autobuild
   - sphinx-copybutton
   - sphinx-inline-tabs
+  - xarray
   - pip:
       - sphinxext-opengraph
       - -e ..
