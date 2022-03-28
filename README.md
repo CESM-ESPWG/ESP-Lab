@@ -6,7 +6,7 @@
 | **Package** |                                                          [![Conda][conda-badge]][conda-link] [![PyPI][pypi-badge]][pypi-link]                                                          |
 | **License** |                                                                         [![License][license-badge]][repo-link]                                                                         |
 
-An Xdev template for a developing a Python project/package
+An Earth System Predictions Python package for use with SMYLE Analysis.
 
 [github-ci-badge]: https://img.shields.io/github/workflow/status/ncar-xdev/python-project-template/CI?label=CI&logo=github
 [github-ci-link]: https://github.com/ncar-xdev/xdev-project/actions?query=workflow%3ACI
