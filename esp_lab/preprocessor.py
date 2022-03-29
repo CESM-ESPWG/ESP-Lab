@@ -1,4 +1,25 @@
-# TODO: Add docstring here, add parameters/returns, move time_set_midmonth?
+"""
+This module provides utilities for preprocessing which can assist in using
+intake-esm in conjunction with that stats-utils and io_utils packages.
+
+Authors
+-------
+    - Steve Yeager
+    - Teagan King
+Use
+---
+    Users wishing to utilize these tools may do so by importing
+    various functions, for example:
+    ::
+        from esp_lab.preprocesser import preprocessor
+
+Dependencies
+------------
+    The user must have an activated conda environment which includes
+    xarray, numpy, and cftime.
+"""
+
+# TODO: move time_set_midmonth?
 
 import numpy as np
 import xarray as xr
@@ -10,7 +31,18 @@ def time_set_midmonth(ds, time_name):
     Return copy of ds with values of ds[time_name] replaced with mid-month
     values (day=15) rather than end-month values.
 
-    Author: S. Yeager
+    Parameters
+    ----------
+    ds
+    time_name
+
+    Returns
+    -------
+    ds
+
+    Author
+    ------
+    S. Yeager
     """
     year = ds[time_name].dt.year
     month = ds[time_name].dt.month
@@ -27,6 +59,16 @@ def preprocessor(ds0, nlead, field):
     """ This preprocessor is applied on an individual timeseries file basis.
     It will return a monthly mean CAM field with centered time coordinate.
     Edit this appropriately for your analysis to speed up processing.
+
+    Parameters
+    ----------
+    ds0
+    nlead
+    field
+
+    Returns
+    -------
+    d0
     """
     d0 = time_set_midmonth(ds0, 'time')
     d0 = d0.isel(time=slice(0, nlead))

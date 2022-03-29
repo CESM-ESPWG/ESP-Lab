@@ -98,7 +98,7 @@ def detrend_linear(dat, dim):
     params = dat.polyfit(dim=dim, deg=1)
     fit = xr.polyval(dat[dim], params.polyfit_coefficients)
     dat = dat - fit
-    return dat  # ToDo: make new name? or leave as is for space efficiency?
+    return dat
 
 
 def remove_drift(da, da_time, y1, y2):
