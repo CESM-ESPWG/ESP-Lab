@@ -128,21 +128,21 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
         file template
     filetype : str
         file ending
-    ens : int (?)
+    ens : int
         ensemble member
-    lead : (?)
+    nlead : int
         (?)
-    field : (?)
-        (?)
+    field : str
+        variable to be examined, eg 'TREFHT'
     firstyear : int
         first start year
     lastyear : int
         last start year
     stmon : str
         month
-    preproc : bool (?)
-        (?)
-    chunks : (array ?)
+    preproc : func
+        preprocessing function (from preprocessor.py)
+    chunks : dict
         chunks for dask array, defaults to {}
 
     Returns

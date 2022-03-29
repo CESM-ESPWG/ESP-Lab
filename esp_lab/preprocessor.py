@@ -33,16 +33,15 @@ def time_set_midmonth(ds, time_name):
 
     Parameters
     ----------
-    ds
-    time_name
-
+    ds : xarray
+        xarray dataset which currently has end month values
+        that will be replaced with mid month values
+    time_name : str
+        name of time component, eg 'time'
     Returns
     -------
-    ds
-
-    Author
-    ------
-    S. Yeager
+    ds : xarray
+        xarray dataset with end month values replaced with mid month values
     """
     year = ds[time_name].dt.year
     month = ds[time_name].dt.month
@@ -62,13 +61,17 @@ def preprocessor(ds0, nlead, field):
 
     Parameters
     ----------
-    ds0
-    nlead
-    field
+    ds0 : xarray
+        timeseries xarray dataset that requires preprocessing
+    nlead : int
+        (?)
+    field : str
+        variable to be examined, eg 'TREFHT'
 
     Returns
     -------
-    d0
+    d0 : xarray
+        xarray dataset of monthly mean CAM field with centered time coordinate
     """
     d0 = time_set_midmonth(ds0, 'time')
     d0 = d0.isel(time=slice(0, nlead))
