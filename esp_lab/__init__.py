@@ -1,4 +1,5 @@
 from pkg_resources import DistributionNotFound, get_distribution
+from data_access import get_monthly_data
 
 try:
     __version__ = get_distribution(__name__).version
