@@ -10,7 +10,6 @@ with that stats-utils and io_utils packages.
 Authors
 -------
     - Steve Yeager
-    - Teagan King
 Use
 ---
     Users wishing to utilize these tools may do so by importing various functions, for example:
