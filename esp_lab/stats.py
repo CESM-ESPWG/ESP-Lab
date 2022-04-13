@@ -9,7 +9,6 @@ Authors
 -------
     - Steve Yeager
     - E. Maroon
-    - Teagan King (packaging contributions)
 Use
 ---
     Users wishing to utilize these tools may do so by importing
