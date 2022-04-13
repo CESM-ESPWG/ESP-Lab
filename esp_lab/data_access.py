@@ -12,7 +12,8 @@ Authors
     - Steve Yeager
 Use
 ---
-    Users wishing to utilize these tools may do so by importing various functions, for example:
+    Users wishing to utilize these tools may do so by importing
+    various functions, for example:
     ::
         from esp-tools.utils.io_utils import file_dict
 
@@ -160,14 +161,17 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     ds0 = xr.open_mfdataset(file_list,
                             combine="nested",
                             # concat_dim depends on how file_list is ordered;
-                            # inner most list of datasets is combined along "M"; ]
+                            # inner most list of datasets is combined along "M"
                             # then the outer list is combined along "Y"
                             concat_dim=["Y", "M"],
                             parallel=True,
                             data_vars=[field],
                             coords="minimal",
                             compat="override",
-                            preprocess=partial(preproc, nlead=nlead, field=field), chunks=chunks)
+                            preprocess=partial(preproc,
+                                               nlead=nlead,
+                                               field=field),
+                            chunks=chunks)
 
     # assign final attributes
     ds0["Y"] = yrs

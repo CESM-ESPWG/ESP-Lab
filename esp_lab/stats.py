@@ -2,8 +2,8 @@
 This module provides utilities to assist in statistics calculations related
 to SMYLE analysis. Functions provide tools to perform linear detrending along
 a particular axis, determine skill metrics based on model and observation
-DataArrays, and generate a distribution of skill scores using a smaller ensemble
-member size.
+DataArrays, and generate a distribution of skill scores using a smaller
+ensemble member size.
 
 Authors
 -------
@@ -71,7 +71,9 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     bootdat1 = bootdat1.reshape([samplesize, nboots])
     bootdat2 = bootdat2.reshape([samplesize, nboots])
 
-    bootcor = xr.corr(xr.DataArray(bootdat1), xr.DataArray(bootdat2), dim='dim_0')  # hardcoded
+    bootcor = xr.corr(xr.DataArray(bootdat1),
+                      xr.DataArray(bootdat2),
+                      dim='dim_0')  # hardcoded
     minci = np.percentile(bootcor, ptilemin)
     maxci = np.percentile(bootcor, ptilemax)
 
@@ -147,11 +149,12 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     mod_da: DataArray
         a seasonally-averaged hindcast DataArray dimensioned (Y,L,M,...)
     mod_time: DataArray
-        a hindcast time DataArray dimensioned (Y,L). NOTE: assumes mod_time.dt.month
+        a hindcast time DataArray dimensioned (Y,L).
+        NOTE: assumes mod_time.dt.month
     obs_da: DataArray
         an OBS DataArray dimensioned (season,year,...)
     detrend (optional): bool
-        defaults to False; if set to True, skill scores will be computed after detrending
+        defaults to False; if True, skill scores computed after detrending
 
     Returns
     -------
