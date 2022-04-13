@@ -79,7 +79,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
         file template
     filetype : str
         file ending
-    ens : int (?)
+    ens : int
         ensemble member
     firstyear : int
         first start year
@@ -90,7 +90,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
 
     Returns
     -------
-    files, yrs[ix==1]: list (?)
+    files, yrs[ix==1]: list
         nested list of files
     """
 
@@ -133,7 +133,8 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     ens : int
         ensemble member
     nlead : int
-        (?)
+        number of months over which data is read; allows for a partial read
+        of the data and controls the time dimension of returned dask array
     field : str
         variable to be examined, eg 'TREFHT'
     firstyear : int
@@ -213,7 +214,8 @@ def preprocessor(ds0, nlead, field):
     ds0 : xarray
         timeseries xarray dataset that requires preprocessing
     nlead : int
-        (?)
+        number of months over which data is read; allows for a partial read
+        of the data and controls the time dimension of returned dask array
     field : str
         variable to be examined, eg 'TREFHT'
     Returns

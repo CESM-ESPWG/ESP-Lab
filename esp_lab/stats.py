@@ -31,7 +31,7 @@ import xskillscore as xs
 
 def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     """
-    #Todo: INCLUDE DESCRIPTION HERE!
+    Determine confidence intervals for correlation scores.
 
     Parameters
     ----------
@@ -42,14 +42,14 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
     nboots : int
         number boots (optional, default 1000)
     conf : float (optional)
-        (?) Defaults to 95
+        confidence value; defaults to 95
 
     Returns
     -------
     minci : float
-        minimum percentile (?)
+        minimum confidence interval
     maxci : float
-        maximum percentile (?)
+        maximum confidence interval
     """
 
     ptilemin = (100. - conf) / 2.
@@ -86,7 +86,7 @@ def detrend_linear(dat, dim):
     ----------
     dat : array
         data which is to be detrended
-    dim : (?)
+    dim : str
         dimension along which linear detrending is performed
 
     Returns
@@ -151,13 +151,12 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     obs_da: DataArray
         an OBS DataArray dimensioned (season,year,...)
     detrend (optional): bool
-        (?) Defaults to False.
+        defaults to False; if set to True, skill scores will be computed after detrending
+
     Returns
     -------
     xr_dataset : DataArray
         the mid-month of a 3-month seasonal average (e.g., mon=1 ==> "DJF").
-    obs_da: DataArray (not returned?)
-        an OBS DataArray dimensioned (season,year,...)
     """
     seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}  # hardcoded
     corr_list = []
@@ -219,16 +218,16 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         a hindcast time DataArray dimensioned (Y,L). Assumes mod_time.dt.month
     obs_da: DataArray
         an OBS DataArray dimensioned (season,year,...)
-    sampsize : int (?)
+    sampsize : int
         sample size
-    N : int (?)
-        maximum dimension (?)
+    N : int
+        maximum dimension for resampling
     detrend : bool (optional)
-        (?) defaults to False
+        defaults to False; if set to True, skill scores will be computed after detrending
 
     Returns
     -------
-    dsout : int (?)
+    dsout : xarray
         mean of resampled skill score distribution
     """
     dslist = []
