@@ -145,7 +145,7 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     stmon : str
         month
     preproc : func
-        preprocessing function (from preprocessor.py)
+        preprocessing function
     chunks : dict
         chunks for dask array, defaults to {}
 
@@ -186,6 +186,7 @@ def time_set_midmonth(ds, time_name):
     """
     Return copy of ds with values of ds[time_name] replaced with mid-month
     values (day=15) rather than end-month values.
+
     Parameters
     ----------
     ds : xarray
@@ -193,6 +194,7 @@ def time_set_midmonth(ds, time_name):
         that will be replaced with mid month values
     time_name : str
         name of time component, eg 'time'
+
     Returns
     -------
     ds : xarray
@@ -210,9 +212,10 @@ def time_set_midmonth(ds, time_name):
 
 
 def preprocessor(ds0, nlead, field):
-    """ This preprocessor is applied on an individual timeseries file basis.
+    """This preprocessor is applied on an individual timeseries file basis.
     It will return a monthly mean CAM field with centered time coordinate.
     Edit this appropriately for your analysis to speed up processing.
+
     Parameters
     ----------
     ds0 : xarray
@@ -222,6 +225,7 @@ def preprocessor(ds0, nlead, field):
         of the data and controls the time dimension of returned dask array
     field : str
         variable to be examined, eg 'TREFHT'
+
     Returns
     -------
     d0 : xarray
