@@ -73,7 +73,7 @@ def cor_ci_bootyears(ts1, ts2, seed=None, nboots=1000, conf=95):
 
     bootcor = xr.corr(xr.DataArray(bootdat1),
                       xr.DataArray(bootdat2),
-                      dim='dim_0')  # hardcoded
+                      dim='dim_0')
     minci = np.percentile(bootcor, ptilemin)
     maxci = np.percentile(bootcor, ptilemax)
 
@@ -128,8 +128,8 @@ def remove_drift(da, da_time, y1, y2):
     Author: E. Maroon (modified by S. Yeager)
     """
 
-    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)  # hardcoded
-    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)  # hardcoded
+    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)
+    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)
     masked_period = da.where((da_time > d1) & (da_time < d2))
     da_climo = masked_period.mean('M').mean('Y')
     da_anom = da - da_climo
@@ -161,7 +161,7 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     xr_dataset : DataArray
         the mid-month of a 3-month seasonal average (e.g., mon=1 ==> "DJF").
     """
-    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}  # hardcoded
+    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}
     corr_list = []
     pval_list = []
     rmse_list = []
@@ -234,7 +234,7 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
         mean of resampled skill score distribution
     """
     dslist = []
-    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}  # hardcoded
+    seasons = {1: 'DJF', 4: 'MAM', 7: 'JJA', 10: 'SON'}
     # convert L to leadtime values:
     leadtime = mod_da.L - 2
     # Perform resampling
