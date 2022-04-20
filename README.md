@@ -1,5 +1,7 @@
 # ESP-Lab
 
+ESP-Lab provides tools for analysis of SMYLE data.
+
 | CI          | [![GitHub Workflow Status][github-ci-badge]][github-ci-link] [![Code Coverage Status][codecov-badge]][codecov-link] [![pre-commit.ci status][pre-commit.ci-badge]][pre-commit.ci-link] |
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | **Docs**    |                                                                     [![Documentation Status][rtd-badge]][rtd-link]                                                                     |
