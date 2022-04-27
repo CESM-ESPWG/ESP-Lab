@@ -22,3 +22,6 @@ An Earth System Predictions Python package for use with SMYLE Analysis.
 [repo-link]: https://github.com/ncar-xdev/python-project-template
 [pre-commit.ci-badge]: https://results.pre-commit.ci/badge/github/ncar-xdev/python-project-template/main.svg
 [pre-commit.ci-link]: https://results.pre-commit.ci/latest/github/ncar-xdev/python-project-template/main
+
+
+Documentation can be found at esp-lab.readthedocs.io
