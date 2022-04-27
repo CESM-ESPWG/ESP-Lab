@@ -1,14 +1,17 @@
-*****
-stats
-*****
-
-stats.py
---------
-.. automodule:: stats
-    :members:
-    :undoc-members:
+Welcome to ESP Lab's documentation!
+===================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
+   :caption: Contents:
 
-   stats
+   stats.rst
+   data_access.rst
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
