@@ -1,5 +1,5 @@
 stats.py
 --------
-.. automodule:: esp_lab
+.. automodule:: stats
     :members:
     :undoc-members:
