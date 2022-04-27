@@ -5,7 +5,7 @@ of filepaths keyed by initialization year, nested lists of files
 for particular start years and ensemble members, and dask arrays
 containing particular hindcast ensembles. This module also provides
 preprocessing which can assist in using intake-esm in conjunction
-with that stats and data_access packages.
+with other data_access functions.
 
 Authors
 -------
