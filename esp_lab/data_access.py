@@ -91,7 +91,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
 
     Returns
     -------
-    files, yrs[ix==1]: list
+    nested_files: list
         nested list of files
     """
 
@@ -119,7 +119,9 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
         else:
             ix[i] = 0
 
-    return files, yrs[ix == 1]
+    nested_files = files, yrs[ix == 1]
+
+    return nested_files
 
 
 def get_monthly_data(filetemplate, filetype, ens, nlead, field,
