@@ -1,6 +1,6 @@
 import datetime
 
-import esp-lab
+import esp_lab
 
 extensions = [
     'sphinx.ext.autodoc',
