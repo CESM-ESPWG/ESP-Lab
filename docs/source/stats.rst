@@ -1,12 +1,5 @@
-*****
-stats
-*****
-
 stats.py
 --------
-.. automodule:: esp_lab.stats
+.. automodule:: esp_lab
     :members:
     :undoc-members:
-
-.. toctree::
-   :maxdepth: 2
