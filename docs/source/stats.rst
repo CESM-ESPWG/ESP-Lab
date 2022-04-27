@@ -4,7 +4,7 @@ stats
 
 stats.py
 --------
-.. automodule:: stats
+.. automodule:: .stats
     :members:
     :undoc-members:
 
