@@ -70,60 +70,6 @@ def file_dict(filetempl, filetype, mem, stmon):
     return filepaths
 
 
-def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon):
-    """
-    Retrieves a nested list of files for these start years and ensemble members
-
-    Parameters
-    ----------
-    filetemplate : str
-        file template
-    filetype : str
-        file ending
-    ens : int
-        ensemble member
-    firstyear : int
-        first start year
-    lastyear : int
-        last start year
-    stmon : str
-        month
-
-    Returns
-    -------
-    nested_files: list
-        nested list of files
-    """
-
-    ens = np.array(range(ens)) + 1
-    yrs = np.arange(firstyear, lastyear + 1)
-    files = []    # a list of lists, dim0=start_year, dim1=ens
-    ix = np.zeros(yrs.shape) + 1
-
-    # loop through all years and ensemble members to retrieve filepaths
-    for yy, i in zip(yrs, range(len(yrs))):
-        ffs = []  # a list of files for this yy
-        file0 = ''
-        for ee in ens:
-            filepaths = file_dict(filetemplate, filetype, ee, stmon)
-            # append file if it is new
-            if yy in filepaths.keys():
-                file = filepaths[yy]
-                if file != file0:
-                    ffs.append(file)
-                    file0 = file
-
-        # append this ensemble member to files
-        if ffs:  # only append if you found files
-            files.append(ffs)
-        else:
-            ix[i] = 0
-
-    nested_files = files, yrs[ix == 1]
-
-    return nested_files
-
-
 def get_monthly_data(filetemplate, filetype, ens, nlead, field,
                      firstyear, lastyear, stmon, preproc, chunks={}):
     """
@@ -189,36 +135,58 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     return ds0
 
 
-def time_set_midmonth(ds, time_name):
+def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon):
     """
-    Return copy of ds with values of ds[time_name] replaced with mid-month
-    values (day=15) rather than end-month values.
+    Retrieves a nested list of files for these start years and ensemble members
 
     Parameters
     ----------
-    ds : xarray
-        xarray dataset which currently has end month values
-        that will be replaced with mid month values
-    time_name : str
-        name of time component, eg 'time'
+    filetemplate : str
+        file template
+    filetype : str
+        file ending
+    ens : int
+        ensemble member
+    firstyear : int
+        first start year
+    lastyear : int
+        last start year
+    stmon : str
+        month
 
     Returns
     -------
-    ds : xarray
-        xarray dataset with end month values replaced with mid month values
+    nested_files: list
+        nested list of files
     """
 
-    # retrieve current time
-    year = ds[time_name].dt.year
-    month = ds[time_name].dt.month
-    year = xr.where(month == 1, year-1, year)
-    month = xr.where(month == 1, 12, month-1)
-    nmonths = len(month)
-    # set time to 15th day of month
-    newtime = [cftime.DatetimeNoLeap(year[i], month[i], 15) for i in range(nmonths)]
-    ds[time_name] = newtime
+    ens = np.array(range(ens)) + 1
+    yrs = np.arange(firstyear, lastyear + 1)
+    files = []    # a list of lists, dim0=start_year, dim1=ens
+    ix = np.zeros(yrs.shape) + 1
 
-    return ds
+    # loop through all years and ensemble members to retrieve filepaths
+    for yy, i in zip(yrs, range(len(yrs))):
+        ffs = []  # a list of files for this yy
+        file0 = ''
+        for ee in ens:
+            filepaths = file_dict(filetemplate, filetype, ee, stmon)
+            # append file if it is new
+            if yy in filepaths.keys():
+                file = filepaths[yy]
+                if file != file0:
+                    ffs.append(file)
+                    file0 = file
+
+        # append this ensemble member to files
+        if ffs:  # only append if you found files
+            files.append(ffs)
+        else:
+            ix[i] = 0
+
+    nested_files = files, yrs[ix == 1]
+
+    return nested_files
 
 
 def preprocessor(ds0, nlead, field):
@@ -258,3 +226,35 @@ def preprocessor(ds0, nlead, field):
     # break xarray into chunks
     d0 = d0.chunk({'L': -1})
     return d0
+
+
+def time_set_midmonth(ds, time_name):
+    """
+    Return copy of ds with values of ds[time_name] replaced with mid-month
+    values (day=15) rather than end-month values.
+
+    Parameters
+    ----------
+    ds : xarray
+        xarray dataset which currently has end month values
+        that will be replaced with mid month values
+    time_name : str
+        name of time component, eg 'time'
+
+    Returns
+    -------
+    ds : xarray
+        xarray dataset with end month values replaced with mid month values
+    """
+
+    # retrieve current time
+    year = ds[time_name].dt.year
+    month = ds[time_name].dt.month
+    year = xr.where(month == 1, year-1, year)
+    month = xr.where(month == 1, 12, month-1)
+    nmonths = len(month)
+    # set time to 15th day of month
+    newtime = [cftime.DatetimeNoLeap(year[i], month[i], 15) for i in range(nmonths)]
+    ds[time_name] = newtime
+
+    return ds
