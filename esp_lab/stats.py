@@ -113,49 +113,6 @@ def detrend_linear(dat, dim):
     return dat
 
 
-def remove_drift(da, da_time, y1, y2):
-    """
-    Function to convert raw DP DataArray into anomaly DP DataArray
-    with leadtime-dependent climatology removed.
-
-    Author
-    ------
-    E. Maroon (modified by S. Yeager)
-
-    Parameters
-    ----------
-    da : DP DataArray
-        Raw DP DataArray with dimensions (Y,L,M,...)
-    da_time : DP DataArray
-        Verification time of DP DataArray (Y,L)
-    y1 : int
-        Start year of climatology
-    y2 : int
-        End year of climatology
-
-    Returns
-    -------
-    da_anom : DP DataArray
-        De-drifted DP DataArray
-    da_climo : DP DataArray
-        Leadtime-dependent climatology
-    """
-
-    # gather first and last second of first and last year, respectively
-    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)
-    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)
-
-    # mask data array outside of selected time
-    masked_period = da.where((da_time > d1) & (da_time < d2))
-    da_climo = masked_period.mean('M').mean('Y')
-
-    # De-drifted DP data array is data array with
-    # leadtime-dependent climotology subtracted
-    da_anom = da - da_climo
-
-    return da_anom, da_climo
-
-
 def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     """
     Computes a suite of deterministic skill metrics given two DataArrays
@@ -326,3 +283,46 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
     dsout = xr.concat(dslist, dim='iteration').mean('iteration').compute()
 
     return dsout
+
+
+def remove_drift(da, da_time, y1, y2):
+    """
+    Function to convert raw DP DataArray into anomaly DP DataArray
+    with leadtime-dependent climatology removed.
+
+    Author
+    ------
+    E. Maroon (modified by S. Yeager)
+
+    Parameters
+    ----------
+    da : DP DataArray
+        Raw DP DataArray with dimensions (Y,L,M,...)
+    da_time : DP DataArray
+        Verification time of DP DataArray (Y,L)
+    y1 : int
+        Start year of climatology
+    y2 : int
+        End year of climatology
+
+    Returns
+    -------
+    da_anom : DP DataArray
+        De-drifted DP DataArray
+    da_climo : DP DataArray
+        Leadtime-dependent climatology
+    """
+
+    # gather first and last second of first and last year, respectively
+    d1 = cftime.DatetimeNoLeap(y1, 1, 1, 0, 0, 0)
+    d2 = cftime.DatetimeNoLeap(y2, 12, 31, 23, 59, 59)
+
+    # mask data array outside of selected time
+    masked_period = da.where((da_time > d1) & (da_time < d2))
+    da_climo = masked_period.mean('M').mean('Y')
+
+    # De-drifted DP data array is data array with
+    # leadtime-dependent climotology subtracted
+    da_anom = da - da_climo
+
+    return da_anom, da_climo
