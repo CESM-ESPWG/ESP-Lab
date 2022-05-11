@@ -3,5 +3,7 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
+  - cftime
   - pytest-cov
   - pre-commit
+  - xarray
