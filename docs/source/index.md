@@ -14,7 +14,6 @@ hidden:
 
 tutorials/index.md
 how-to/index.md
-explanation/index.md
 reference/index.md
 
 ```
