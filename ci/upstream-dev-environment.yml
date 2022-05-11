@@ -6,3 +6,7 @@ dependencies:
   - pytest-cov
   - pre-commit
   - cftime
+  - xarray
+  - numpy
+  - functools
+  - glob
