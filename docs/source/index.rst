@@ -10,7 +10,6 @@ Welcome to ESP Lab's documentation!
    changelog.md
    tutorials/index.md
    reference/index.md
-   explanation/index.md
    how-to/index.md
 
 Indices and tables
