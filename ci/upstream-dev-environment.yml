@@ -8,3 +8,4 @@ dependencies:
   - cftime
   - xarray
   - numpy
+  - xskillscore
