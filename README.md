@@ -6,7 +6,7 @@
   - [Installation](#installation)
 
 ## Badges
-| CI          | [![GitHub Workflow Status][github-ci-badge]][github-ci-link] [![Code Coverage Status][codecov-badge]][codecov-link] [![pre-commit.ci status][pre-commit.ci-badge]][pre-commit.ci-link] |
+| CI          | [![GitHub Workflow Status][github-ci-badge]][github-ci-link] [![Code Coverage Status][codecov-badge]][codecov-link] |
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | **Docs**    |                                                                     [![Documentation Status][rtd-badge]][rtd-link]                                                                     |
 | **Package** |                                                          [![Conda][conda-badge]][conda-link] [![PyPI][pypi-badge]][pypi-link]                                                          |
@@ -39,8 +39,6 @@ python -m pip install intake-esm
 [conda-link]: https://anaconda.org/conda-forge/esp-lab
 [license-badge]: https://img.shields.io/github/license/CESM-ESPWG/ESP-Lab
 [repo-link]: https://github.com/CESM-ESPWG/ESP-Lab
-[pre-commit.ci-badge]: https://results.pre-commit.ci/badge/github/CESM-ESPWG/ESP-Lab/main.svg
-[pre-commit.ci-link]: https://results.pre-commit.ci/latest/github/CESM-ESPWG/ESP-Lab/main
 
 
 Documentation can be found at [esp-lab.readthedocs.io](esp-lab.readthedocs.io)
