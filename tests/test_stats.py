@@ -2,7 +2,13 @@ import sys
 
 import pytest
 
-# from esp_lab.stats import cor_ci_bootyears, detrend_linear, leadtime_skill_seas, leadtime_skill_seas_resamp, remove_drift
+import xarray as xr
+import numpy as np
+import sys
+import cftime
+import xskillscore as 
+
+from esp_lab.stats import cor_ci_bootyears, detrend_linear, leadtime_skill_seas, leadtime_skill_seas_resamp, remove_drift
 
 def test_cor_ci_bootyears():
     """
