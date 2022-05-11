@@ -11,6 +11,7 @@ Welcome to ESP Lab's documentation!
    tutorials/index.md
    reference/index.md
    explanation/index.md
+   how-to/index.md
 
 Indices and tables
 ==================
