@@ -6,7 +6,7 @@ import xarray as xr
 import numpy as np
 import sys
 import cftime
-import xskillscore as 
+import xskillscore as xs
 
 from esp_lab.stats import cor_ci_bootyears, detrend_linear, leadtime_skill_seas, leadtime_skill_seas_resamp, remove_drift
 
