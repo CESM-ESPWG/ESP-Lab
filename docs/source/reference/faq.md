@@ -1,7 +1,7 @@
 # Frequently Asked Questions
 
 ### Q: How do I install ESP-Lab?
-A: See documentation at [https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.md.html](https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.md.html]).
+A: See documentation at [https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.html](https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.html).
 
 ### Q: How can I set up a preprocessor?
 A: See documentation at [how-to/use_preprocessor.md](how-to/use_preprocessor.md).
