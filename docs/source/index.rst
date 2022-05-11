@@ -9,6 +9,8 @@ Welcome to ESP Lab's documentation!
    data_access.rst
    changelog.md
    tutorials/index.md
+   reference/index.md
+   explanation/index.md
 
 Indices and tables
 ==================
