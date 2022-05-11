@@ -12,4 +12,5 @@ A: ESP-Lab's [changelog](https://esp-lab.readthedocs.io/en/latest/reference/chan
 ### Q: Can I submit a feature request or bug report?
 A: Yes, please don't hesitate to make a post in our [Discussion](https://github.com/CESM-ESPWG/ESP-Lab/discussions) for feature requests or open an [Issue](https://github.com/CESM-ESPWG/ESP-Lab/issues) on GitHub to report a bug. If you have a solution to a problem you've encountered, feel free to create a pull request.
 
-Need more help? Create an issue on GitHub at [https://github.com/CESM-ESPWG/ESP-Lab/issues](https://github.com/CESM-ESPWG/ESP-Lab/issues).
+### Need more help?
+Create an issue on GitHub at [https://github.com/CESM-ESPWG/ESP-Lab/issues](https://github.com/CESM-ESPWG/ESP-Lab/issues).
