@@ -10,3 +10,5 @@ dependencies:
   - numpy
   - functools
   - glob
+  - sys
+  -xskillscore
