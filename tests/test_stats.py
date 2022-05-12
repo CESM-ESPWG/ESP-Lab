@@ -51,8 +51,10 @@ def test_detrend_linear():
     ds = xr.Dataset({"data": (["time", "x", "y"], data)})
 
     # Apply polyfit.
-    fit = ds.polyfit(dim="time", deg=1)
-    final_dat = ds - fit
+    final_dat = detrend_linear(ds, "time")
+    
+    # fit = ds.polyfit(dim="time", deg=1)
+    # final_dat = ds - fit
 
     assert final_dat.dims == {'x': 2, 'y': 2, 'degree': 2}
     assert (final_dat['x'].data == np.array([0, 1])).all()
