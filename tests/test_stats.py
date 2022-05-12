@@ -13,17 +13,13 @@ def test_cor_ci_bootyears():
     Test the cor_ci_bootyears function.
     """
     ts1 = np.array([1, 2, 3, 1, 2, 3, 1, 2, 3])
-    ts2 = np.array([4, 5, 6, 7, 8, 9, 1, 2, 3])
+    ts2 = ts1
 
-    # result12 = cor_ci_bootyears(ts1, ts2)
-    result11 = cor_ci_bootyears(ts1, ts1)
-
-    # assert result12[0] < -0.4  # -0.43306723784214496
-    # assert result12[1] > 0.8  # 0.8097240500333097
+    result = cor_ci_bootyears(ts1, ts2)
 
     # An array should be fully correlated with itself
-    assert result11[0] > 0.999
-    assert result11[1] < 1.001
+    assert result[0] > 0.999
+    assert result[1] < 1.001
 
 
 def test_detrend_linear():
@@ -47,19 +43,19 @@ def test_detrend_linear():
                             time=time,
                             reference_time=reference_time),
                       attrs=dict(
-                            description="Ambient temperature.",
+                            description="Temperature.",
                             units="degC"))
 
-    # Apply polyfit.
+    # Apply linear detrending
     final_dat = detrend_linear(da, "time")
-    # params = da.polyfit(dim="time", deg=1)
-    # fit = xr.polyval(da["time"], params.polyfit_coefficients)
-    # final_dat = da - fit
 
     assert final_dat.dims == ('x', 'y', 'time')
-    assert final_dat.data[0][0][0] == 2.499999999985448
-    assert final_dat.data[1][1][1] == -1.3333333333333304
-    assert final_dat.data[1][0][1] == 2.6666666666569654
+    assert final_dat.data[0][0][0] > 2.4
+    assert final_dat.data[0][0][0] < 2.5
+    assert final_dat.data[1][1][1] > -1.4
+    assert final_dat.data[1][1][1] < -1.3
+    assert final_dat.data[1][0][1] > 2.6
+    assert final_dat.data[1][0][1] < 2.7
 
 
 def test_leadtime_skill_seas():
