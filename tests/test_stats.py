@@ -1,11 +1,9 @@
-import sys
-
-import pytest
-
-import xarray as xr
-import numpy as np
-import sys
 import cftime
+import numpy as np
+import pandas as pd
+import pytest
+import sys
+import xarray as xr
 import xskillscore as xs
 
 from esp_lab.stats import cor_ci_bootyears, detrend_linear, leadtime_skill_seas, leadtime_skill_seas_resamp, remove_drift
