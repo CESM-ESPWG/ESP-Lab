@@ -33,33 +33,35 @@ def test_detrend_linear():
     Test the detrend_linear function.
     """
 
-    # Create some example data.
-    tsize = 10
-    xsize = 2
-    ysize = 2
-
-    # create array of nan's with correct size
-    data = np.ones((tsize, xsize, ysize)) * np.nan
-
-    # fill array with data
-    data[:, 0, 0] = np.linspace(0, 10, tsize)
-    data[:, 1, 0] = np.logspace(0, 1, tsize)
-    data[:, 0, 1] = np.logspace(1.5, 0.5, tsize)
-    data[:, 1, 1] = np.linspace(40, 10, tsize)
-
-    # Put the data in a xarray.Dataset.
-    ds = xr.Dataset({"data": (["time", "x", "y"], data)})
+    temperature = np.array([[[16,  2,  3],
+                             [14, 27, 12]],
+                            [[14, 14,  6],
+                             [12, 10, 12]]])
+    lon = [[-99.83, -99.32], [-99.79, -99.23]]
+    lat = [[42.25, 42.21], [42.63, 42.59]]
+    time = pd.date_range("2014-09-06", periods=3)
+    reference_time = pd.Timestamp("2014-09-05")
+    da = xr.DataArray(data=temperature,
+                      dims=["x", "y", "time"],
+                      coords=dict(
+                            lon=(["x", "y"], lon),
+                            lat=(["x", "y"], lat),
+                            time=time,
+                            reference_time=reference_time),
+                      attrs=dict(
+                            description="Ambient temperature.",
+                            units="degC"))
 
     # Apply polyfit.
-    final_dat = detrend_linear(ds, "time")
-    
-    # fit = ds.polyfit(dim="time", deg=1)
-    # final_dat = ds - fit
+    final_dat = detrend_linear(da, "time")
+    # params = da.polyfit(dim="time", deg=1)
+    # fit = xr.polyval(da["time"], params.polyfit_coefficients)
+    # final_dat = da - fit
 
-    assert final_dat.dims == {'x': 2, 'y': 2, 'degree': 2}
-    assert (final_dat['x'].data == np.array([0, 1])).all()
-    assert (final_dat['y'].data == np.array([0, 1])).all()
-    assert (final_dat['degree'].data == np.array([1, 0])).all()
+    assert final_dat.dims == ('x', 'y', 'time')
+    assert final_dat.data[0][0][0] == 2.499999999985448
+    assert final_dat.data[1][1][1] == -1.3333333333333304
+    assert final_dat.data[1][0][1] == 2.6666666666569654
 
 
 def test_leadtime_skill_seas():
