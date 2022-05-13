@@ -32,6 +32,21 @@ def test_get_monthly_data():
     """
     Test the get_monthly_data function.
     """
+    # filetemplate = 'tests/test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.zsatcalc.*.nc'
+    # filetype = '.pop.h.'
+    # ens = 3
+    # firstyear = 1986
+    # lastyear = 1988
+    # stmon = 2
+    # nlead = 24
+    # field = 'zsatcalc'
+    # preproc = preprocessor
+
+    # ds0 = get_monthly_data(filetemplate, filetype, ens, nlead, field,
+    #                  firstyear, lastyear, stmon, preproc)
+
+    # print("ds0 {}".format(ds0))
+
     # todo: make test
 
     assert True
