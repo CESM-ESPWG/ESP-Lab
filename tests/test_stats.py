@@ -18,7 +18,7 @@ def test_cor_ci_bootyears():
     Test the cor_ci_bootyears function.
     """
     ts1 = np.array([1, 2, 3, 1, 2, 3, 1, 2, 3])
-    ts2 = ts1*1.001
+    ts2 = ts1*1.01
 
     result = cor_ci_bootyears(ts1, ts2)
 
