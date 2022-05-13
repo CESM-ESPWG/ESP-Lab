@@ -9,6 +9,7 @@ ignore:
   - 'setup.py'
 
 coverage:
+  range: 25...75
   precision: 2
   round: down
   status:
