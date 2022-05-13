@@ -1,14 +1,16 @@
-import sys
-
-import pytest
-
 import cftime
+from functools import partial
 import glob
 import numpy as np
+import sys
 import xarray as xr
-from functools import partial
 
-from esp_lab.data_access import time_set_midmonth, file_dict, get_monthly_data, nested_file_list_by_year, preprocessor
+from esp_lab.data_access import time_set_midmonth
+from esp_lab.data_access import file_dict
+from esp_lab.data_access import get_monthly_data
+from esp_lab.data_access import nested_file_list_by_year
+from esp_lab.data_access import preprocessor
+
 
 def test_time_set_midmonth():
     """
@@ -23,19 +25,26 @@ def test_file_dict():
     """
     Test the file_dict function.
     """
-    test = True
 
-    assert test
+    filetemplate = 'test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.zsatcalc.*.nc'
+    filetype = '.pop.h.'
+    mem = 3
+    stmon = 2
+
+    filepaths = file_dict(filetemplate, filetype, mem, stmon)
+
+    assert filepaths[1986] == 'test_data/b.e21.BSMYLE.f09_g17.1986-02.003.pop.h.zsatcalc.198602-198801.nc'
+    assert len(filepaths.keys) == 3
 
 
 def test_get_monthly_data():
     """
     Test the get_monthly_data function.
     """
-    test = True
+    # todo: make test
 
-    assert test
-    
+    assert True
+
 
 def test_nested_file_list_by_year():
     """
@@ -50,6 +59,6 @@ def test_preprocessor():
     """
     Test the preprocessor function.
     """
-    test = True
+    # todo: make test
 
-    assert test
+    assert True

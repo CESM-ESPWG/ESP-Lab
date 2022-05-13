@@ -1,12 +1,16 @@
 import cftime
 import numpy as np
 import pandas as pd
-import pytest
 import sys
 import xarray as xr
 import xskillscore as xs
 
-from esp_lab.stats import cor_ci_bootyears, detrend_linear, leadtime_skill_seas, leadtime_skill_seas_resamp, remove_drift
+from esp_lab.stats import cor_ci_bootyears
+from esp_lab.stats import detrend_linear
+from esp_lab.stats import leadtime_skill_seas
+from esp_lab.stats import leadtime_skill_seas_resamp
+from esp_lab.stats import remove_drift
+
 
 def test_cor_ci_bootyears():
     """
@@ -62,24 +66,24 @@ def test_leadtime_skill_seas():
     """
     Test the leadtime_skill_seas function.
     """
-    test = True
+    # todo: make test
 
-    assert test
-    
+    assert True
+
 
 def test_leadtime_skill_seas_resamp():
     """
     Test the leadtime_skill_seas_resamp function.
     """
-    test = True
+    # todo: make test
 
-    assert test
+    assert True
 
 
 def test_remove_drift():
     """
     Test the remove_drift function.
     """
-    test = True
+    # todo: make test
 
-    assert test
+    assert True

@@ -41,9 +41,9 @@ def file_dict(filetempl, filetype, mem, stmon):
         file template
     filetype : str
         file ending
-    mem : str
+    mem : int
         ensemble member
-    stmon : str
+    stmon : int
         month
 
     Returns
