@@ -1,6 +1,7 @@
 import cftime
 import numpy as np
 import pandas as pd
+import pytest
 import sys
 import xarray as xr
 import xskillscore as xs
@@ -24,6 +25,20 @@ def test_cor_ci_bootyears():
     # Two very similar arrays should be highly correlated
     assert result[0] > 0.9
     assert result[1] < 1.1
+
+
+def test_cor_ci_bootyears_two_different_array_sizes():
+    """
+    Test that the cor_ci_bootyears function fails with
+    two differently sized arrays.
+    """
+    ts1 = np.array([1, 2, 3, 1, 2, 3, 1, 2, 3])
+    ts2 = np.array([1, 2, 3])
+
+    with pytest.raises(SystemExit) as e:
+        cor_ci_bootyears(ts1, ts2)
+
+    assert e.type == SystemExit
 
 
 def test_detrend_linear():
