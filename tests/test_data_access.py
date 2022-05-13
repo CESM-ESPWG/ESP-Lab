@@ -31,15 +31,9 @@ def test_file_dict():
     mem = 3
     stmon = 2
 
-    import os
-    print("cwd {}".format(os.getcwd()))
-
-    print("glob {}".format(glob.glob('tests/test_data/')))
-
     filepaths = file_dict(filetemplate, filetype, mem, stmon)
-    print("filepaths {}".format(filepaths))
 
-    assert filepaths[1986] == 'test_data/b.e21.BSMYLE.f09_g17.1986-02.003.pop.h.zsatcalc.198602-198801.nc'
+    assert filepaths[1986] == 'tests/test_data/b.e21.BSMYLE.f09_g17.1986-02.003.pop.h.zsatcalc.198602-198801.nc'
     assert len(filepaths.keys) == 3
 
 
