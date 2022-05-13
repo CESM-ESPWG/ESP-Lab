@@ -12,15 +12,6 @@ from esp_lab.data_access import nested_file_list_by_year
 from esp_lab.data_access import preprocessor
 
 
-def test_time_set_midmonth():
-    """
-    Test the time_set_midmonth function.
-    """
-    test = True
-
-    assert test
-
-
 def test_file_dict():
     """
     Test the file_dict function.
@@ -50,9 +41,17 @@ def test_nested_file_list_by_year():
     """
     Test the nested_file_list_by_year function.
     """
-    test = True
+    filetemplate = 'tests/test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.zsatcalc.*.nc'
+    filetype = '.pop.h.'
+    ens = 3
+    firstyear = 1986
+    lastyear = 1988
+    stmon = 2
 
-    assert test
+    nested_files = nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon)
+    print("nested_files {}".format(nested_files))
+
+    assert nested_files[1][2] == 1988
 
 
 def test_preprocessor():
@@ -62,3 +61,12 @@ def test_preprocessor():
     # todo: make test
 
     assert True
+
+
+def test_time_set_midmonth():
+    """
+    Test the time_set_midmonth function.
+    """
+    test = True
+
+    assert test
