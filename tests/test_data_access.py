@@ -64,9 +64,25 @@ def test_nested_file_list_by_year():
     stmon = 2
 
     nested_files = nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon)
-    print("nested_files {}".format(nested_files))
 
     assert nested_files[1][2] == 1988
+
+
+def test_bad_nested_file_list_by_year():
+    """
+    Test the nested_file_list_by_year function for a bad value.
+    """
+    filetemplate = 'tests/test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.NONEXISTANT_FIELD.*.nc'
+    filetype = '.pop.h.'
+    ens = 3
+    firstyear = 1986
+    lastyear = 1988
+    stmon = 2
+
+    nested_files = nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon)
+    print("nested_files {}".format(nested_files))
+
+    assert nested_files[1][0] == 0
 
 
 def test_preprocessor():
