@@ -17,11 +17,11 @@ def test_cor_ci_bootyears():
     Test the cor_ci_bootyears function.
     """
     ts1 = np.array([1, 2, 3, 1, 2, 3, 1, 2, 3])
-    ts2 = ts1
+    ts2 = ts1*1.0000001
 
     result = cor_ci_bootyears(ts1, ts2)
 
-    # An array should be fully correlated with itself
+    # Two very similar arrays should be highly correlated
     assert result[0] > 0.999
     assert result[1] < 1.001
 
