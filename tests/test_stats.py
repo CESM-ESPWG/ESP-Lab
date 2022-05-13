@@ -41,6 +41,18 @@ def test_cor_ci_bootyears_two_different_array_sizes():
     assert e.type == SystemExit
 
 
+def test_cor_ci_bootyears_seed():
+    """
+    Test that the cor_ci_bootyears function random seed
+    generates the same exact result each time
+    """
+    ts1 = np.array([15, 24, 35, 11, 52, 63, 71, 22, 83])
+    ts2 = np.array([10, 22, 34, 11, 33, 57, 22, 71, 90])
+    result = cor_ci_bootyears(ts1, ts2, seed=123)
+    
+    assert result == (-0.22524093559047992, 0.9763300171129478)
+
+
 def test_detrend_linear():
     """
     Test the detrend_linear function.
