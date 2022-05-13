@@ -13,7 +13,9 @@
 | **License** |                                                                         [![License][license-badge]][repo-link]                                                                         |
 
 ## Overview
-ESP-Lab is an Earth System Predictions Python package that was originally designed to enable users to effectively perform I/O operations and statistics on SMYLE data. It is available to assist with data for earth system predictions. 
+ESP-Lab is an Earth System Predictions Python package that was originally designed to enable users to effectively perform I/O operations and statistics on [SMYLE (The Seasonal-to-Multiyear Large Ensemble)](https://doi.org/10.5194/gmd-2022-60) data. It provides a foundation for analysis of multiyear prediction of environmental change.
+
+Some of the challenges with multiyear prediction that ESP-Lab addresses include working with lead times ranging from 1 month to 2 years, as well as efficiently analyzing large ensembles.
 
 This package provides utilities which support input/output processes such as methods to return dictionaries of filepaths keyed by initialization year, nested lists of files for particular start years and ensemble members, and dask arrays containing particular hindcast ensembles. ESP-Lab also provides
 preprocessing which can assist in using intake-esm in conjunction with other data_access functions.
