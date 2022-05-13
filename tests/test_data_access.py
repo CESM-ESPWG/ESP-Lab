@@ -26,7 +26,7 @@ def test_file_dict():
     Test the file_dict function.
     """
 
-    filetemplate = 'test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.zsatcalc.*.nc'
+    filetemplate = 'tests/test_data/b.e21.BSMYLE.f09_g17.????-MM.EEE.pop.h.zsatcalc.*.nc'
     filetype = '.pop.h.'
     mem = 3
     stmon = 2
@@ -34,7 +34,7 @@ def test_file_dict():
     import os
     print("cwd {}".format(os.getcwd()))
 
-    print("glob {}".format(glob.glob('test_data/')))
+    print("glob {}".format(glob.glob('tests/test_data/')))
 
     filepaths = file_dict(filetemplate, filetype, mem, stmon)
     print("filepaths {}".format(filepaths))
