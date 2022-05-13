@@ -34,7 +34,7 @@ def test_file_dict():
     filepaths = file_dict(filetemplate, filetype, mem, stmon)
 
     assert filepaths[1986] == 'tests/test_data/b.e21.BSMYLE.f09_g17.1986-02.003.pop.h.zsatcalc.198602-198801.nc'
-    assert len(filepaths.keys) == 3
+    assert len(filepaths.keys()) == 3
 
 
 def test_get_monthly_data():
