@@ -26,8 +26,15 @@ ESP Lab also enables statistics calculations through functions providing tools t
 ESP_Lab will soon be able to be installed from PyPI with pip:
 
 ```bash
-python -m pip install intake-esm
+python -m pip install esp-lab
 ```
+
+Currently, the best way to install is as follows:
+1) git clone https://github.com/CESM-ESPWG/ESP-Lab.git
+2) cd ESP-Lab
+3) conda env create --file environment.yml
+4) conda activate esp-lab
+4) pip install -e .
 
 [github-ci-badge]: https://img.shields.io/github/workflow/status/CESM-ESPWG/ESP-Lab/CI?label=CI&logo=github
 [github-ci-link]: https://github.com/CESM-ESPWG/ESP-Lab/actions?query=workflow%3ACI
