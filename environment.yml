@@ -8,6 +8,7 @@ dependencies:
   - bokeh
   - bottleneck
   - cartopy
+  - click=8.0  # click newer than 8.0 breaks dask 2021.9
   - climpred
   - cf-units
   - cftime
