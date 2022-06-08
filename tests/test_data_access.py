@@ -80,7 +80,6 @@ def test_bad_nested_file_list_by_year():
     nested_files = nested_file_list_by_year(filetemplate, filetype, ens, start_years, stmon)
 
     assert nested_files[0] == []
-    assert (nested_files[1] == []).all()
 
 
 def test_preprocessor():
