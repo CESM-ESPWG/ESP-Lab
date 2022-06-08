@@ -182,7 +182,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, start_years, stmon):
         else:
             filecount.append(0)
 
-    nested_files = files, yrs[filecount!=0]
+    nested_files = files, yrs[np.where(filecount!=0)[0][0]]
 
     return nested_files
 
