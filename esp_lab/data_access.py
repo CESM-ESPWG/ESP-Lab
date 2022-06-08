@@ -71,7 +71,7 @@ def file_dict(filetempl, filetype, mem, stmon):
 
 
 def get_monthly_data(filetemplate, filetype, ens, nlead, field,
-                     firstyear, lastyear, stmon, preproc, chunks={}):
+                     start_years, stmon, preproc, chunks={}):
     """
     Returns a dask array containing the requested hindcast ensemble.
 
@@ -88,10 +88,8 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
         of the data and controls the time dimension of returned dask array
     field : str
         variable to be examined, eg 'TREFHT'
-    firstyear : int
-        first start year
-    lastyear : int
-        last start year
+    startyears : list
+        list of start years which are integers
     stmon : str
         month
     preproc : func
@@ -107,7 +105,7 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
 
     # Retrieve nested list of files
     file_list, yrs = nested_file_list_by_year(filetemplate, filetype, ens,
-                                              firstyear, lastyear, stmon)
+                                              start_years, stmon)
 
     # open xarray dataset, passing in parameters including preprocessing fxn
     ds0 = xr.open_mfdataset(file_list,
@@ -126,7 +124,7 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
                             chunks=chunks)
 
     # assign final attributes
-    ds0["Y"] = yrs
+    ds0["Y"] = start_years
     ds0["M"] = np.arange(ds0.sizes["M"]) + 1
 
     # reorder into desired format (Y,L,M,...)
@@ -135,7 +133,7 @@ def get_monthly_data(filetemplate, filetype, ens, nlead, field,
     return ds0
 
 
-def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, stmon):
+def nested_file_list_by_year(filetemplate, filetype, ens, start_years, stmon):
     """
     Retrieves a nested list of files for these start years and ensemble members
 
@@ -147,10 +145,8 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
         file ending
     ens : int
         ensemble member
-    firstyear : int
-        first start year
-    lastyear : int
-        last start year
+    start_years : list
+        list of start years which are integers
     stmon : str
         month
 
@@ -161,7 +157,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, firstyear, lastyear, s
     """
 
     ens = np.array(range(ens)) + 1
-    yrs = np.arange(firstyear, lastyear + 1)
+    yrs = start_years
     files = []    # a list of lists, dim0=start_year, dim1=ens
     ix = np.zeros(yrs.shape) + 1
 
