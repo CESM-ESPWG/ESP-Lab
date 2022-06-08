@@ -160,6 +160,7 @@ def nested_file_list_by_year(filetemplate, filetype, ens, start_years, stmon):
     yrs = start_years
     files = []    # a list of lists, dim0=start_year, dim1=ens
     filecount = []
+    yrs_final = []
 
     # loop through all years and ensemble members to retrieve filepaths
     for yy, i in zip(yrs, range(len(yrs))):
@@ -179,10 +180,11 @@ def nested_file_list_by_year(filetemplate, filetype, ens, start_years, stmon):
         if ffs:  # only append if you found files
             files.append(ffs)
             filecount.append(1)
+            yrs_final.append(yy)
         else:
             filecount.append(0)
 
-    nested_files = files, yrs[np.where(np.array(filecount)!=0)[0][0]]
+    nested_files = files, yrs_final
 
     return nested_files
 
