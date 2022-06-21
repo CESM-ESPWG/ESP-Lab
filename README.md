@@ -44,8 +44,8 @@ Currently, the best way to install is as follows:
 [rtd-link]: https://esp-lab.readthedocs.io/en/latest/?badge=latest
 [pypi-badge]: https://img.shields.io/pypi/v/esp-lab?logo=pypi
 [pypi-link]: https://pypi.org/project/esp-lab
-<!-- [conda-badge]: https://img.shields.io/conda/vn/conda-forge/esp-lab?logo=anaconda
-[conda-link]: https://anaconda.org/TeaganK/esp-lab -->
+[conda-badge]: https://img.shields.io/conda/vn/conda-forge/esp-lab?logo=anaconda
+[conda-link]: https://anaconda.org/TeaganK/esp-lab
 [license-badge]: https://img.shields.io/github/license/CESM-ESPWG/ESP-Lab
 [repo-link]: https://github.com/CESM-ESPWG/ESP-Lab
 
