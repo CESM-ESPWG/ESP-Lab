@@ -9,6 +9,7 @@ Authors
 -------
     - Steve Yeager
     - E. Maroon
+
 Use
 ---
     Users wishing to utilize these tools may do so by importing
@@ -289,10 +290,6 @@ def remove_drift(da, da_time, y1, y2):
     """
     Function to convert raw DP DataArray into anomaly DP DataArray
     with leadtime-dependent climatology removed.
-
-    Author
-    ------
-    E. Maroon (modified by S. Yeager)
 
     Parameters
     ----------
