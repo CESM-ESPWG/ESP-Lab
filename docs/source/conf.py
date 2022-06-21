@@ -26,6 +26,7 @@ autodoc_member_order = 'groupwise'
 # MyST config
 myst_enable_extensions = ['amsmath', 'colon_fence', 'deflist', 'html_image']
 myst_url_schemes = ['http', 'https', 'mailto']
+nbsphinx_allow_errors = True
 
 # sphinx-copybutton configurations
 copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: '
@@ -39,18 +40,15 @@ autosummary_generate = []
 autodoc_typehints = 'none'
 
 # Napoleon configurations
-
 napoleon_google_docstring = False
 napoleon_numpy_docstring = True
 napoleon_use_param = False
 napoleon_use_rtype = False
 napoleon_preprocess_types = False
 
-
 jupyter_execute_notebooks = 'cache'
 execution_timeout = 600
 execution_allow_errors = True
-
 
 # The master toctree document.
 master_doc = 'index'
@@ -61,21 +59,17 @@ project = 'esp-lab'
 copyright = f'{current_year}, esp-lab developers'
 author = 'esp-lab developers'
 
-
 # The short X.Y version.
 version = esp_lab.__version__.split('+')[0]
 # The full version, including alpha/beta/rc tags.
 release = esp_lab.__version__
 
-
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = ['_build', '**.ipynb_checkpoints', 'Thumbs.db', '.DS_Store']
 
-
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
-
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -93,20 +87,16 @@ html_theme_options = dict(
     # canonical_url="",
 )
 
-
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 # html_logo = '../_static/images/NSF_4-Color_bitmap_Logo.png'
-
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 html_last_updated_fmt = '%b %d, %Y'
 
-
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'esp-labdoc'
-
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -118,7 +108,6 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     # 'preamble': '',
 }
-
 
 latex_documents = [('index', 'esp-lab.tex', 'esp-lab Documentation', author, 'manual')]
 
