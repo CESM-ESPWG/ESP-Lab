@@ -8,7 +8,6 @@ Welcome to ESP Lab's documentation!
    stats.rst
    data_access.rst
    changelog.md
-   tutorials/index.md
    reference/index.md
    how-to/index.md
 
