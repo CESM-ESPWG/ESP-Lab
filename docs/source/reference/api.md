@@ -3,7 +3,7 @@ This page provides an auto-generated summary of intake-esm’s API. For more det
 
 ## data_access
 ```{eval-rst}
-.. auotmodule:: esp_lab.data_access
+.. automodule:: esp_lab.data_access
     :members:
     :noindex:
     :special-members: __init__
@@ -11,7 +11,7 @@ This page provides an auto-generated summary of intake-esm’s API. For more det
 
 ## stats
 ```{eval-rst}
-.. auotmodule:: esp_lab.stats
+.. automodule:: esp_lab.stats
     :members:
     :noindex:
     :special-members: __init__
