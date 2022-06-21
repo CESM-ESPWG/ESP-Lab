@@ -12,7 +12,6 @@ maxdepth: 1
 hidden:
 ---
 
-tutorials/index.md
 how-to/index.md
 reference/index.md
 
