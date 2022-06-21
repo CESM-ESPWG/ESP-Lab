@@ -27,6 +27,7 @@ autodoc_member_order = 'groupwise'
 myst_enable_extensions = ['amsmath', 'colon_fence', 'deflist', 'html_image']
 myst_url_schemes = ['http', 'https', 'mailto']
 nbsphinx_allow_errors = True
+nbsphinx_execute = 'never'
 
 # sphinx-copybutton configurations
 copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: '
