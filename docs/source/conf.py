@@ -28,7 +28,7 @@ myst_enable_extensions = ['amsmath', 'colon_fence', 'deflist', 'html_image']
 myst_url_schemes = ['http', 'https', 'mailto']
 nbsphinx_allow_errors = True
 nbsphinx_execute = 'never'
-nbsphinx_kernel_name = 'python3'
+nbsphinx_kernel_name = 'esp_lab'
 
 # sphinx-copybutton configurations
 copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: '
