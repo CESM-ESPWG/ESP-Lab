@@ -3,6 +3,9 @@
 ### Q: How do I install ESP-Lab?
 A: See documentation at [https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.html](https://esp-lab.readthedocs.io/en/latest/how-to/install-esp-lab.html).
 
+### Are there examples of using ESP-Lab tools?
+Notebooks with examples of the ESP-Lab tools are available at [https://github.com/CESM-ESPWG/ESP-Lab/tree/main/docs/source/tutorials](https://github.com/CESM-ESPWG/ESP-Lab/tree/main/docs/source/tutorials).
+
 ### Q: How can I set up a preprocessor?
 A: See documentation at [how-to/use_preprocessor.md](how-to/use_preprocessor.md).
 
