@@ -29,6 +29,13 @@ ESP_Lab will soon be able to be installed from PyPI with pip:
 python -m pip install esp-lab
 ```
 
+Note: If you use `pip` to install `esp-lab`, you can install `esp-lab` directly into a pre-existing conda environment (after doing `conda activate <environment_name>` and any requirements that you do not already have will be added automatically to that environment during installation. Another option is to create a new environment, for instance with `conda env create --name esp-lab` and then activate that environment with `conda activate esp-lab`. At that point, you are ready to install `esp-lab` into the new environment with `python -m pip install esp-lab`.
+
+ESP_Lab is currently available on Test PyPi:
+```bash
+pip install -i https://test.pypi.org/simple/ esp-lab==0.0.6
+```
+
 Currently, the best way to install is as follows:
 1) git clone https://github.com/CESM-ESPWG/ESP-Lab.git
 2) cd ESP-Lab
