@@ -50,7 +50,7 @@ Currently, the best way to install is as follows:
 [rtd-badge]: https://img.shields.io/readthedocs/esp-lab/latest.svg
 [rtd-link]: https://esp-lab.readthedocs.io/en/latest/?badge=latest
 [pypi-badge]: https://img.shields.io/pypi/v/esp-lab?logo=pypi
-[pypi-link]: https://pypi.org/project/esp-lab
+[pypi-link]: https://test.pypi.org/project/esp-lab/0.0.6/
 [conda-badge]: https://img.shields.io/conda/vn/conda-forge/esp-lab?logo=anaconda
 [conda-link]: https://anaconda.org/TeaganK/esp-lab
 [license-badge]: https://img.shields.io/github/license/CESM-ESPWG/ESP-Lab
