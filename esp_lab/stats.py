@@ -8,7 +8,7 @@ ensemble member size.
 Authors
 -------
     - Steve Yeager
-    - E. Maroon
+    - Elizabeth Maroon
 
 Use
 ---
@@ -100,8 +100,8 @@ def detrend_linear(dat, dim):
 
     Returns
     -------
-    dat : array
-        detrended array
+    dat : DataArray
+        detrended DataArray
     """
 
     # determine parameters
@@ -137,7 +137,7 @@ def leadtime_skill_seas(mod_da, mod_time, obs_da, detrend=False):
     Returns
     -------
     xr_dataset : DataArray
-        the mid-month of a 3-month seasonal average (e.g., mon=1 ==> "DJF").
+        set of skill score metrics
     """
 
     # default seasons
@@ -222,7 +222,7 @@ def leadtime_skill_seas_resamp(mod_da, mod_time, obs_da, sampsize, N, detrend=Fa
     Returns
     -------
     dsout : xarray
-        mean of resampled skill score distribution
+        mean of resampled skill score metrics
     """
 
     dslist = []
@@ -331,15 +331,41 @@ def remove_drift(da, da_time, y1, y2):
 
 def compute_skill_annual(mod_da,mod_time,obs_da,nleadavg=1,nleads=1,resamp=0,detrend=False):
     """
-    Computes a suite of skill scores for annual data. Option to use xskillscore resampling to
-    compute the mean variance of individual member time series ("sigma_total").
-    Assumes mod_time and obs_da.time both contain integer year values.
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should contain annual-average fields.
+
+    Parameters
+    ----------
+    mod_da: DataArray
+        an annually-averaged hindcast DataArray dimensioned (Y,L,M,...)
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). Assumes year values as int or float.
+    obs_da: DataArray
+        an annually-averaged OBS DataArray dimensioned (time,...)
+    nleadavg : int (optional)
+        permits additional temporal smoothing (e.g., nleadavg=3 to verify 3-year average hindcasts).
+    nleads : int (optional)
+        number of leads to include in skill computation (e.g., nleadavg=3,nleads=2 will
+        return metrics for: FY1-3, FY2-4)
+    resamp : bool (optional)
+        number of resamplings of individual-member timeseries for computing forecast variance.
+    detrend : bool (optional)
+        defaults to False; if set to True, skill scores will be computed after detrending
+
+    Returns
+    -------
+    dsout : DataArray
+        set of skill score metrics
     """
     corr_list = []; pval_list = []; rmse_list = []; msss_list = []; rpc_list = []
     sigobs_list = []; sigsig_list = []; sigtot_list = []; s2t_list = []
     
     lvals = np.arange(nleadavg)
     lvalsda = xr.DataArray(np.arange(nleads)+1,dims="L",name="L")
+    if (nleadavg>1):
+        obs_ts = obs_da.rolling(time=nleadavg,min_periods=nleadavg, center=True).mean().dropna('time')
     for i in range(nleads):
         leadisel = lvals + i 
         ens_ts = mod_da.isel(L=leadisel).mean('L').rename({'Y':'time'})
@@ -384,9 +410,40 @@ def compute_skill_annual(mod_da,mod_time,obs_da,nleadavg=1,nleads=1,resamp=0,det
 
 def compute_skill_seasonal(mod_da,mod_time,obs_da,climy0,climy1,nleadavg=1,nleads=1,resamp=0,detrend=False,monthly=False):
     """
-    Computes a suite of skill scores for annual data. Includes option to use xskillscore resampling to
-    compute the mean variance of individual member time series ("sigma_total").
-    Assumes mod_time and obs_da.time are cftime arrays with year/month values.
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should contain either monthly or 3monthseason-average fields.
+
+    Parameters
+    ----------
+    mod_da: DataArray
+        a monthly or seasonally-averaged (de-drifted) hindcast DataArray dimensioned (Y,L,M,...)
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). Assumes mod_time.dt.month & mod_time.dt.year exist.
+    obs_da: DataArray
+        a monthly or seasonally-averaged OBS DataArray dimensioned (time,...)
+    climy0: int
+        start year of climatology for computing anomalies
+    climy1: int
+        end year of climatology for computing anomalies    
+    nleadavg : int (optional)
+        sets temporal smoothing (e.g., nleadavg=3 to verify 3-year average fields).
+    nleads : int (optional)
+        number of leads to include in skill computation (e.g., nleadavg=3,nleads=2 will
+        return metrics for FY1-3, FY2-4)
+    resamp : bool (optional)
+        number of resamplings of individual-member timeseries for computing forecast variance.
+    detrend : bool (optional)
+        defaults to False; if set to True, skill scores will be computed after detrending
+    monthly : bool (optional)
+        set to True if mod_da and obs_da are monthly means (skill will be computed for each lead month
+        instead of each lead season)
+
+    Returns
+    -------
+    dsout : DataArray
+        set of skill score metrics
     """
     corr_list = []; pval_list = []; rmse_list = []; msss_list = []; rpc_list = []
     sigobs_list = []; sigsig_list = []; sigtot_list = []; s2t_list = []
@@ -446,15 +503,47 @@ def compute_skill_seasonal(mod_da,mod_time,obs_da,climy0,climy1,nleadavg=1,nlead
     return xr.Dataset({'corr':corr,'pval':pval,'rmse':rmse,'msss':msss,'rpc':rpc,'sig_obs':sigo,'sig_sig':sigs,'sig_tot':sigt,'s2t':s2t})
 
 
-def compute_resampskill_annual(mod_da,mod_time,obs_da,nyear=1,nleads=1,detrend=False,resamp=0,mean=True):
+def compute_resampskill_annual(mod_da,mod_time,obs_da,nleadavg=1,nleads=1,detrend=False,resamp=0,mean=True):
     """
-    Computes a suite of skill scores for annual data.
-    Assumes mod_time and obs_da.time both contain year values.
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should contain annual fields.
+    
+    Unlike compute_skill_annual(), this version operates on a mod_da input that
+    has already been resampled across the member dimension (M) such that it has
+    an 'iteration' dimension. Returns the resampled skill score distribution (or the mean
+    of the skill score distribution if mean==True).
+
+    Parameters
+    ----------
+    mod_da: DataArray
+        a annually-averaged (de-drifted) hindcast DataArray dimensioned (Y,L,M,...). Assumes 'iteration' dimension.
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). Assumes year values as int or float.
+    obs_da: DataArray
+        a annually-averaged OBS DataArray dimensioned (time,...)
+    nleadavg : int (optional)
+        sets temporal smoothing (e.g., nleadavg=3 to verify 3-year average fields).
+    nleads : int (optional)
+        number of leads to include in skill computation (e.g., nleadavg=3,nleads=2 will
+        return metrics for FY1-3, FY2-4)
+    resamp : bool (optional)
+        number of resamplings of individual-member timeseries for computing forecast variance.
+    detrend : bool (optional)
+        defaults to False; if set to True, skill scores will be computed after detrending
+    mean : bool (optional)
+        set to False to return full resampled skill score distribution
+
+    Returns
+    -------
+    dsout : DataArray
+        set of skill score metrics
     """
     dslist = []
-    if (nyear>1):
-        obs_ts = obs_da.rolling(time=nyear,min_periods=nyear, center=True).mean().dropna('time')
-    lvals = np.arange(nyear)
+    if (nleadavg>1):
+        obs_ts = obs_da.rolling(time=nleadavg,min_periods=nleadavg, center=True).mean().dropna('time')
+    lvals = np.arange(nleadavg)
     lvalsda = xr.DataArray(np.arange(nleads),dims="L",name="L")
     for l in mod_da.iteration.values:
         corr_list = []; pval_list = []; rmse_list = []; msss_list = []; rpc_list = []
@@ -502,14 +591,55 @@ def compute_resampskill_annual(mod_da,mod_time,obs_da,nyear=1,nleads=1,detrend=F
         dsout = dsout.mean('iteration')
     return dsout
 
-def compute_resampskill_seasonal(mod_da,mod_time,obs_da,climy0,climy1,nleadavg=1,nleads=1,detrend=False,resamp=0,mean=True):
+def compute_resampskill_seasonal(mod_da,mod_time,obs_da,climy0,climy1,nleadavg=1,nleads=1,detrend=False,resamp=0,mean=True,monthly=False):
     """
-    Computes a suite of skill scores for annual data. Includes option to use xskillscore resampling to
-    compute the mean variance of individual member time series ("sigma_total").
-    Assumes mod_time and obs_da.time both contain year values.
+    Computes a suite of deterministic skill metrics given two DataArrays
+    corresponding to model and observations, which must share the same
+    lat/lon coordinates (if any). Assumes time coordinates are compatible
+    (can be aligned). Both DataArrays should contain either monthly or 3monthseason-average fields.
+    
+    Unlike compute_skill_annual(), this version operates on a mod_da input that
+    has already been resampled across the member dimension (M) such that it has
+    an 'iteration' dimension. Returns the resampled skill score distribution (or the mean
+    of the skill score distribution if mean==True).
+
+    Parameters
+    ----------
+    mod_da: DataArray
+        a monthly or seasonally-averaged (de-drifted) hindcast DataArray dimensioned (Y,L,M,...). Assumes 'iteration' dimension.
+    mod_time: DataArray
+        a hindcast time DataArray dimensioned (Y,L). Assumes mod_time.dt.month & mod_time.dt.year exist.
+    obs_da: DataArray
+        a monthly or seasonally-averaged OBS DataArray dimensioned (time,...)
+    climy0: int
+        start year of climatology for computing anomalies
+    climy1: int
+        end year of climatology for computing anomalies    
+    nleadavg : int (optional)
+        sets temporal smoothing (e.g., nleadavg=3 to verify 3-year average fields).
+    nleads : int (optional)
+        number of leads to include in skill computation (e.g., nleadavg=3,nleads=2 will
+        return metrics for FY1-3, FY2-4)
+    resamp : bool (optional)
+        number of resamplings of individual-member timeseries for computing forecast variance.
+    detrend : bool (optional)
+        defaults to False; if set to True, skill scores will be computed after detrending
+    mean : bool (optional)
+        set to False to return full resampled skill score distribution
+    monthly : bool (optional)
+        set to True if mod_da and obs_da are monthly means (skill will be computed for each lead month
+        instead of each lead season)
+
+    Returns
+    -------
+    dsout : DataArray
+        set of skill score metrics
     """
     dslist = []
-    lvals = np.arange(nleadavg)*4
+    if (monthly):
+        lvals = np.arange(nleadavg)*12
+    else:
+        lvals = np.arange(nleadavg)*4
     # Convert to leadtime values
     lvalsda = xr.DataArray(mod_da.isel(L=slice(0,nleads)).L-2,dims="L",name="L")
     
