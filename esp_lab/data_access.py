@@ -10,6 +10,7 @@ with other data_access functions.
 Authors
 -------
     - Steve Yeager
+    - Elizabeth Maroon
 
 Use
 ---
