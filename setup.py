@@ -26,7 +26,7 @@ CLASSIFIERS = [
 
 setup(
     name='esp-lab',
-    version='1.0.0',
+    version='1.0.1',
     description='Utilities for SMYLE Analysis',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -47,6 +47,6 @@ setup(
     license='Apache 2.0',
     zip_safe=False,
     entry_points={},
-    keywords='ESP-Lab, SMYLE, Analysis',
+    keywords='ESP-Lab, SMYLE, Analysis, Earth System Predictions',
     use_scm_version={'version_scheme': 'post-release', 'local_scheme': 'dirty-tag'},
 )
