@@ -23,7 +23,7 @@ preprocessing which can assist in using intake-esm in conjunction with other dat
 ESP Lab also enables statistics calculations through functions providing tools to perform linear detrending along a particular axis, determine skill metrics based on model and observation DataArrays, and generate a distribution of skill scores using a smaller ensemble member size.
 
 ## Installation
-ESP_Lab will soon be able to be installed from PyPI with pip:
+ESP_Lab can be installed from PyPI with pip:
 
 ```bash
 python -m pip install esp-lab
@@ -31,12 +31,8 @@ python -m pip install esp-lab
 
 Note: If you use `pip` to install `esp-lab`, you can install `esp-lab` directly into a pre-existing conda environment (after doing `conda activate <environment_name>` and any requirements that you do not already have will be added automatically to that environment during installation. Another option is to create a new environment, for instance with `conda env create --name esp-lab` and then activate that environment with `conda activate esp-lab`. At that point, you are ready to install `esp-lab` into the new environment with `python -m pip install esp-lab`.
 
-ESP_Lab is currently available on Test PyPi:
-```bash
-pip install -i https://test.pypi.org/simple/ esp-lab==0.0.6
-```
 
-Currently, the best way to install is as follows:
+One can also install `esp-lab` as a developer by following these steps:
 1) git clone https://github.com/CESM-ESPWG/ESP-Lab.git
 2) cd ESP-Lab
 3) conda env create --file environment.yml
