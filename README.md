@@ -6,10 +6,10 @@
   - [Installation](#installation)
 
 ## Badges
-| CI          | [![GitHub Workflow Status][github-ci-badge]][github-ci-link] [![Code Coverage Status][codecov-badge]][codecov-link] |
+| CI          |                                                               [![Code Coverage Status][codecov-badge]][codecov-link] |
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | **Docs**    |                                                                     [![Documentation Status][rtd-badge]][rtd-link]                                                                     |
-| **Package** |                                                          [![Conda][conda-badge]][conda-link] [![PyPI][pypi-badge]][pypi-link]                                                          |
+| **Package** |                                                                             [![PyPI][pypi-badge]][pypi-link]                                                                           |
 | **License** |                                                                         [![License][license-badge]][repo-link]                                                                         |
 
 ## Overview
@@ -39,16 +39,12 @@ One can also install `esp-lab` as a developer by following these steps:
 4) conda activate esp-lab
 4) pip install -e .
 
-[github-ci-badge]: https://img.shields.io/github/workflow/status/CESM-ESPWG/ESP-Lab/CI?label=CI&logo=github
-[github-ci-link]: https://github.com/CESM-ESPWG/ESP-Lab/actions?query=workflow%3ACI
 [codecov-badge]: https://img.shields.io/codecov/c/github/CESM-ESPWG/ESP-Lab.svg?logo=codecov
 [codecov-link]: https://codecov.io/gh/CESM-ESPWG/ESP-Lab
 [rtd-badge]: https://img.shields.io/readthedocs/esp-lab/latest.svg
 [rtd-link]: https://esp-lab.readthedocs.io/en/latest/?badge=latest
 [pypi-badge]: https://img.shields.io/pypi/v/esp-lab?logo=pypi
 [pypi-link]: https://test.pypi.org/project/esp-lab/0.0.6/
-[conda-badge]: https://img.shields.io/conda/vn/conda-forge/esp-lab?logo=anaconda
-[conda-link]: https://anaconda.org/TeaganK/esp-lab
 [license-badge]: https://img.shields.io/github/license/CESM-ESPWG/ESP-Lab
 [repo-link]: https://github.com/CESM-ESPWG/ESP-Lab
 
